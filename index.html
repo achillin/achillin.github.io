@@ -22,7 +22,7 @@
   </div>
 
   <h4>Signal data (copy & paste between peers)</h4>
-  <div>updated 3</div>
+  <div>updated 4</div>
   <textarea id="signal" placeholder="Paste offer/answer here..."></textarea>
 
 <div id="messages">some</div>
@@ -57,8 +57,10 @@
       };
 
       pc.onicecandidate = (event) => {
+        if (event.candidate) {
 	  console.log('ICE candidate host:', event.candidate.host);
-        if (event.candidate) return;
+		return;
+		}
         signalBox.value = JSON.stringify(pc.localDescription);
       };
 	document.getElementById("messages").innerHTML+="start done<br><br>"; 
