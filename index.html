@@ -34,8 +34,18 @@
     let pc;
     const servers = {
       iceServers: [
-        {
+	  {
           urls: 'turn:34.79.33.63:3478',
+          username: 'chill',
+          credential: 'CwM?H9q8$b#'
+        },
+        {
+          urls: 'turn:34.79.33.63:3478?transport=udp',
+          username: 'chill',
+          credential: 'CwM?H9q8$b#'
+        },
+		{
+          urls: 'turn:34.79.33.63:3478?transport=tcp',
           username: 'chill',
           credential: 'CwM?H9q8$b#'
         }
