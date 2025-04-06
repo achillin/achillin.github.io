@@ -57,7 +57,7 @@
       };
 
       pc.onicecandidate = (event) => {
-	  console.log('ICE candidate:', event.candidate);
+	  console.log('ICE candidate host:', event.candidate.host);
         if (event.candidate) return;
         signalBox.value = JSON.stringify(pc.localDescription);
       };
