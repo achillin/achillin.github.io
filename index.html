@@ -24,6 +24,7 @@
   <h4>Signal data (copy & paste between peers)</h4>
   <textarea id="signal" placeholder="Paste offer/answer here..."></textarea>
 
+<div id="messages">some</div>
   <script>
     let localVideo = document.getElementById('localVideo');
     let remoteVideo = document.getElementById('remoteVideo');
@@ -42,6 +43,9 @@
     };
 
     async function start() {
+	
+	document.getElementById("messages").innerHTML+="start clicked<br><br>"; 
+	
       const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
       localVideo.srcObject = stream;
 
@@ -56,21 +60,35 @@
         if (event.candidate) return;
         signalBox.value = JSON.stringify(pc.localDescription);
       };
+	document.getElementById("messages").innerHTML+="start done<br><br>"; 
+	  
     }
 
     async function createOffer() {
+	document.getElementById("messages").innerHTML+="create offer clicked<br><br>"; 
+	
       const offer = await pc.createOffer();
       await pc.setLocalDescription(offer);
+	document.getElementById("messages").innerHTML+="create offer done<br><br>"; 
+	  
     }
 
     async function createAnswer() {
+	document.getElementById("messages").innerHTML+="create answer clicked<br><br>"; 
+	
       const answer = await pc.createAnswer();
       await pc.setLocalDescription(answer);
+	document.getElementById("messages").innerHTML+="create answer done<br><br>"; 
+	  
     }
 
     async function setRemote() {
+	document.getElementById("messages").innerHTML+="start set remote<br><br>"; 
+	
       const desc = JSON.parse(signalBox.value);
       await pc.setRemoteDescription(desc);
+	document.getElementById("messages").innerHTML+=" set remote done<br><br>"; 
+	  
     }
   </script>
 </body>
