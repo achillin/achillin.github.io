@@ -22,7 +22,7 @@
   </div>
 
   <h4>Signal data (copy & paste between peers)</h4>
-  <div>updated 5</div>
+  <div>updated 6</div>
   <textarea id="signal" placeholder="Paste offer/answer here..."></textarea>
 
 <div id="messages">some</div>
@@ -58,7 +58,8 @@
 
       pc.onicecandidate = (event) => {
         if (event.candidate) {
-			console.log('ICE candidate host:', event.candidate.type);
+			console.log('ICE candidate :', event.candidate.type);
+			console.log('ICE candidate type:', event.candidate.type);
 			return;
 		}
         signalBox.value = JSON.stringify(pc.localDescription);
