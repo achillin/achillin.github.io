@@ -1,22 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="/assets/logo.webp">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Bungee+Inline&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">  
-  <title>Mastermind</title>
-  <script type="module" crossorigin src="/assets/index-UlzAaEGf.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-D4D1eiHg.css">
+  <title>Simple WebRTC Test</title>
+  <style>
+    video { width: 45%; margin: 1%; background: #000; }
+    textarea { width: 90%; height: 100px; margin-top: 10px; }
+    body { font-family: sans-serif; text-align: center; padding: 20px; }
+  </style>
 </head>
-<div id="fb-root"></div>
-<body  style="background-color:#2c3e50;">
-  <div id="app"></div>
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v20.0&appId=358172363716835" nonce="x6enIkIZ"></script>
-</body>
+<body>
+  <h2>Simple WebRTC Video Test</h2>
+  <video id="localVideo" autoplay muted playsinline></video>
+  <video id="remoteVideo" autoplay playsinline></video>
 
+  <div>
+    <button onclick="start()">Start</button>
+    <button onclick="createOffer()">Create Offer</button>
+    <button onclick="createAnswer()">Create Answer</button>
+    <button onclick="setRemote()">Set Remote</button>
+  </div>
+
+  <h4>Signal data (copy & paste between peers)</h4>
+  <div>updated 7</div>
+  <textarea id="signal" placeholder="Paste offer/answer here..."></textarea>
+
+<div id="messages">some</div>
+  <script>
+    let localVideo = document.getElementById('localVideo');
+    let remoteVideo = document.getElementById('remoteVideo');
+    let signalBox = document.getElementById('signal');
+
+    let pc;
+    const servers = {
+      iceServers: [
+        {
+          urls: 'turn:34.79.33.63:3478',
+          username: 'chill',
+          credential: 'CwM?H9q8$b#'
+        }
+      ]
+    };
+
+    async function start() {
+	
+	document.getElementById("messages").innerHTML+="start clicked<br><br>"; 
+	
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+      localVideo.srcObject = stream;
+
+      pc = new RTCPeerConnection(servers);
+      stream.getTracks().forEach(track => pc.addTrack(track, stream));
+
+      pc.ontrack = (event) => {
+        remoteVideo.srcObject = event.streams[0];
+      };
+
+      pc.onicecandidate = (event) => {
+        if (event.candidate) {
+			console.log('ICE candidate :', event.candidate);
+			console.log('ICE candidate type:', event.candidate.type);
+			return;
+		}
+        signalBox.value = JSON.stringify(pc.localDescription);
+      };
+	document.getElementById("messages").innerHTML+="start done<br><br>"; 
+	  
+    }
+
+    async function createOffer() {
+	document.getElementById("messages").innerHTML+="create offer clicked<br><br>"; 
+	
+      const offer = await pc.createOffer();
+      await pc.setLocalDescription(offer);
+	document.getElementById("messages").innerHTML+="create offer done<br><br>"; 
+	  
+    }
+
+    async function createAnswer() {
+	document.getElementById("messages").innerHTML+="create answer clicked<br><br>"; 
+	
+      const answer = await pc.createAnswer();
+      await pc.setLocalDescription(answer);
+	document.getElementById("messages").innerHTML+="create answer done<br><br>"; 
+	  
+    }
+
+    async function setRemote() {
+	document.getElementById("messages").innerHTML+="start set remote<br><br>"; 
+	
+      const desc = JSON.parse(signalBox.value);
+      await pc.setRemoteDescription(desc);
+	document.getElementById("messages").innerHTML+=" set remote done<br><br>"; 
+	  
+    }
+  </script>
+</body>
 </html>
