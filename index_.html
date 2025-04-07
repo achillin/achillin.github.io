@@ -22,7 +22,7 @@
   </div>
 
   <h4>Signal data (copy & paste between peers)</h4>
-  <div>updated 7</div>
+  <div>updated 8</div>
   <textarea id="signal" placeholder="Paste offer/answer here..."></textarea>
 
 <div id="messages">some</div>
@@ -34,8 +34,18 @@
     let pc;
     const servers = {
       iceServers: [
-        {
+	  {
           urls: 'turn:34.79.33.63:3478',
+          username: 'chill',
+          credential: 'CwM?H9q8$b#'
+        },
+        {
+          urls: 'turn:34.79.33.63:3478?transport=udp',
+          username: 'chill',
+          credential: 'CwM?H9q8$b#'
+        },
+		{
+          urls: 'turn:34.79.33.63:3478?transport=tcp',
           username: 'chill',
           credential: 'CwM?H9q8$b#'
         }
