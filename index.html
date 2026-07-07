@@ -12,8 +12,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <title>Mastermind</title>
-  <script type="module" crossorigin src="/assets/index-DqTF5DsA.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-CKCs4XjR.css">
+  <script>
+    // Restore the deep link that public/404.html tucked into ?p= before the
+    // router boots (GitHub Pages SPA fallback — Pages has no rewrite rules)
+    (function () {
+      var p = new URLSearchParams(window.location.search).get('p');
+      if (p) history.replaceState(null, '', p + window.location.hash);
+    })();
+  </script>
+  <script type="module" crossorigin src="/assets/index-Rx_T1muA.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-XMp4RzLz.css">
 </head>
 <body>
   <div id="app"></div>
