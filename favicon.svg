@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- the game's DNA: a 2x2 of code pegs on the app's dark navy -->
+  <rect width="64" height="64" rx="14" fill="#0a0f1c"/>
+  <circle cx="22.5" cy="22.5" r="9.5" fill="#c62828"/>
+  <circle cx="41.5" cy="22.5" r="9.5" fill="#1565c0"/>
+  <circle cx="22.5" cy="41.5" r="9.5" fill="#fbc02d"/>
+  <circle cx="41.5" cy="41.5" r="9.5" fill="#388e3c"/>
+</svg>

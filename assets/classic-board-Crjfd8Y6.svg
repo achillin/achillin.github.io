@@ -1,0 +1,189 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 500" role="img" aria-label="The classic Mastermind board">
+  <defs>
+    <!-- light comes from the upper left, like a table under a lamp -->
+    <linearGradient id="bodyGrad" x1="0" y1="0" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#8a4d39"/>
+      <stop offset="0.45" stop-color="#74402e"/>
+      <stop offset="1" stop-color="#582d1f"/>
+    </linearGradient>
+    <linearGradient id="rimGrad" x1="0" y1="0" x2="0.7" y2="1">
+      <stop offset="0" stop-color="#a06450"/>
+      <stop offset="1" stop-color="#63331f"/>
+    </linearGradient>
+    <!-- hole depth: dark under the top edge, faint light on the far wall -->
+    <linearGradient id="holeGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1f0d07"/>
+      <stop offset="0.65" stop-color="#3a1a10"/>
+      <stop offset="1" stop-color="#4d2416"/>
+    </linearGradient>
+    <linearGradient id="wellGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3c1b10"/>
+      <stop offset="1" stop-color="#552a1a"/>
+    </linearGradient>
+    <radialGradient id="ballShade" cx="0.5" cy="0.9" r="0.9">
+      <stop offset="0.45" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.4"/>
+    </radialGradient>
+    <radialGradient id="ballShine" cx="0.32" cy="0.25" r="0.6">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="0.35" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="floorShadow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#000000" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- moulded hole with a raised rim -->
+    <g id="donut">
+      <circle r="12.5" fill="url(#rimGrad)"/>
+      <circle r="12" fill="none" stroke="#b57a63" stroke-width="0.8" stroke-opacity="0.55"/>
+      <circle r="8.6" fill="url(#holeGrad)"/>
+      <circle r="8.6" fill="none" stroke="#150a05" stroke-width="0.8" stroke-opacity="0.7"/>
+    </g>
+    <!-- glossy ball peg with contact shadow -->
+    <g id="ball">
+      <ellipse cy="8.6" rx="8.2" ry="2.4" fill="#000000" opacity="0.35"/>
+      <circle r="9.4"/>
+      <circle r="9.4" fill="url(#ballShade)"/>
+      <circle r="9.4" fill="url(#ballShine)"/>
+    </g>
+    <!-- small scoring pin (round head on a stem) -->
+    <g id="pin">
+      <ellipse cy="6.4" rx="3.4" ry="1.2" fill="#000000" opacity="0.35"/>
+      <rect x="-1.1" y="0" width="2.2" height="6" rx="1"/>
+      <circle r="3.6"/>
+      <circle r="3.6" fill="url(#ballShade)"/>
+      <circle r="3.6" fill="url(#ballShine)"/>
+    </g>
+    <!-- tiny feedback hole -->
+    <g id="mini"><circle r="2.9" fill="#200e07"/><circle r="2.9" fill="none" stroke="#150a05" stroke-width="0.6" stroke-opacity="0.7"/></g>
+  </defs>
+
+  <!-- floor shadow under the box -->
+  <ellipse cx="160" cy="480" rx="150" ry="16" fill="url(#floorShadow)"/>
+
+  <!-- box body with bevel edges -->
+  <rect x="16" y="10" width="288" height="474" rx="18" fill="url(#bodyGrad)"/>
+  <rect x="16" y="10" width="288" height="474" rx="18" fill="none" stroke="#bd8069" stroke-opacity="0.5" stroke-width="1.4"/>
+  <rect x="19" y="13" width="282" height="468" rx="15" fill="none" stroke="#2e1409" stroke-opacity="0.55" stroke-width="1.4"/>
+
+  <!-- top storage well with a loose pile of ball pegs -->
+  <rect x="30" y="24" width="188" height="60" rx="9" fill="url(#wellGrad)"/>
+  <rect x="30" y="24" width="188" height="8" rx="4" fill="#200e07" opacity="0.55"/>
+  <g>
+    <use href="#ball" fill="#b71c1c" x="52" y="46"/>
+    <use href="#ball" fill="#1258a8" x="74" y="58"/>
+    <use href="#ball" fill="#e8e4da" x="96" y="44"/>
+    <use href="#ball" fill="#2f7d33" x="118" y="59"/>
+    <use href="#ball" fill="#e3ac16" x="140" y="46"/>
+    <use href="#ball" fill="#d96c0c" x="162" y="58"/>
+    <use href="#ball" fill="#1258a8" x="184" y="45"/>
+    <use href="#ball" fill="#2f7d33" x="62" y="70"/>
+    <use href="#ball" fill="#b71c1c" x="86" y="73"/>
+    <use href="#ball" fill="#e3ac16" x="110" y="72"/>
+    <use href="#ball" fill="#141414" x="134" y="74"/>
+    <use href="#ball" fill="#e8e4da" x="158" y="72"/>
+  </g>
+  <!-- scoring pins parked top right -->
+  <g>
+    <use href="#pin" fill="#141414" x="238" y="36"/>
+    <use href="#pin" fill="#141414" x="254" y="44"/>
+    <use href="#pin" fill="#141414" x="270" y="36"/>
+    <use href="#pin" fill="#141414" x="246" y="58"/>
+    <use href="#pin" fill="#e8e4da" x="262" y="66"/>
+    <use href="#pin" fill="#e8e4da" x="278" y="58"/>
+    <use href="#pin" fill="#e8e4da" x="238" y="74"/>
+    <use href="#pin" fill="#e8e4da" x="254" y="80"/>
+  </g>
+
+  <!-- ten guess rows: four moulded holes + sunken feedback pad -->
+  <!-- rows are 30px apart; the two front rows are played -->
+  <g id="rows">
+    <g transform="translate(0,112)">
+      <use href="#donut" x="58"/><use href="#donut" x="104"/><use href="#donut" x="150"/><use href="#donut" x="196"/>
+      <use href="#ball" fill="#2f7d33" x="58"/>
+      <use href="#ball" fill="#e3ac16" x="104"/>
+      <use href="#ball" fill="#b71c1c" x="150"/>
+      <use href="#ball" fill="#1258a8" x="196"/>
+      <rect x="232" y="-13" width="30" height="26" rx="4" fill="url(#wellGrad)"/>
+      <use href="#mini" x="241" y="-5"/><use href="#mini" x="253" y="-5"/>
+      <use href="#mini" x="241" y="6"/><use href="#mini" x="253" y="6"/>
+      <use href="#pin" fill="#141414" x="241" y="-8"/>
+      <use href="#pin" fill="#e8e4da" x="253" y="-8"/>
+    </g>
+    <g transform="translate(0,144)">
+      <use href="#donut" x="58"/><use href="#donut" x="104"/><use href="#donut" x="150"/><use href="#donut" x="196"/>
+      <use href="#ball" fill="#d96c0c" x="58"/>
+      <use href="#ball" fill="#1258a8" x="104"/>
+      <use href="#ball" fill="#2f7d33" x="150"/>
+      <use href="#ball" fill="#e8e4da" x="196"/>
+      <rect x="232" y="-13" width="30" height="26" rx="4" fill="url(#wellGrad)"/>
+      <use href="#mini" x="241" y="-5"/><use href="#mini" x="253" y="-5"/>
+      <use href="#mini" x="241" y="6"/><use href="#mini" x="253" y="6"/>
+      <use href="#pin" fill="#141414" x="241" y="-8"/>
+      <use href="#pin" fill="#141414" x="253" y="-8"/>
+    </g>
+    <g transform="translate(0,176)">
+      <use href="#donut" x="58"/><use href="#donut" x="104"/><use href="#donut" x="150"/><use href="#donut" x="196"/>
+      <rect x="232" y="-13" width="30" height="26" rx="4" fill="url(#wellGrad)"/>
+      <use href="#mini" x="241" y="-5"/><use href="#mini" x="253" y="-5"/>
+      <use href="#mini" x="241" y="6"/><use href="#mini" x="253" y="6"/>
+    </g>
+    <g transform="translate(0,208)">
+      <use href="#donut" x="58"/><use href="#donut" x="104"/><use href="#donut" x="150"/><use href="#donut" x="196"/>
+      <rect x="232" y="-13" width="30" height="26" rx="4" fill="url(#wellGrad)"/>
+      <use href="#mini" x="241" y="-5"/><use href="#mini" x="253" y="-5"/>
+      <use href="#mini" x="241" y="6"/><use href="#mini" x="253" y="6"/>
+    </g>
+    <g transform="translate(0,240)">
+      <use href="#donut" x="58"/><use href="#donut" x="104"/><use href="#donut" x="150"/><use href="#donut" x="196"/>
+      <rect x="232" y="-13" width="30" height="26" rx="4" fill="url(#wellGrad)"/>
+      <use href="#mini" x="241" y="-5"/><use href="#mini" x="253" y="-5"/>
+      <use href="#mini" x="241" y="6"/><use href="#mini" x="253" y="6"/>
+    </g>
+    <g transform="translate(0,272)">
+      <use href="#donut" x="58"/><use href="#donut" x="104"/><use href="#donut" x="150"/><use href="#donut" x="196"/>
+      <rect x="232" y="-13" width="30" height="26" rx="4" fill="url(#wellGrad)"/>
+      <use href="#mini" x="241" y="-5"/><use href="#mini" x="253" y="-5"/>
+      <use href="#mini" x="241" y="6"/><use href="#mini" x="253" y="6"/>
+    </g>
+    <g transform="translate(0,304)">
+      <use href="#donut" x="58"/><use href="#donut" x="104"/><use href="#donut" x="150"/><use href="#donut" x="196"/>
+      <rect x="232" y="-13" width="30" height="26" rx="4" fill="url(#wellGrad)"/>
+      <use href="#mini" x="241" y="-5"/><use href="#mini" x="253" y="-5"/>
+      <use href="#mini" x="241" y="6"/><use href="#mini" x="253" y="6"/>
+    </g>
+    <g transform="translate(0,336)">
+      <use href="#donut" x="58"/><use href="#donut" x="104"/><use href="#donut" x="150"/><use href="#donut" x="196"/>
+      <rect x="232" y="-13" width="30" height="26" rx="4" fill="url(#wellGrad)"/>
+      <use href="#mini" x="241" y="-5"/><use href="#mini" x="253" y="-5"/>
+      <use href="#mini" x="241" y="6"/><use href="#mini" x="253" y="6"/>
+    </g>
+    <g transform="translate(0,368)">
+      <use href="#donut" x="58"/><use href="#donut" x="104"/><use href="#donut" x="150"/><use href="#donut" x="196"/>
+      <rect x="232" y="-13" width="30" height="26" rx="4" fill="url(#wellGrad)"/>
+      <use href="#mini" x="241" y="-5"/><use href="#mini" x="253" y="-5"/>
+      <use href="#mini" x="241" y="6"/><use href="#mini" x="253" y="6"/>
+    </g>
+    <g transform="translate(0,400)">
+      <use href="#donut" x="58"/><use href="#donut" x="104"/><use href="#donut" x="150"/><use href="#donut" x="196"/>
+      <rect x="232" y="-13" width="30" height="26" rx="4" fill="url(#wellGrad)"/>
+      <use href="#mini" x="241" y="-5"/><use href="#mini" x="253" y="-5"/>
+      <use href="#mini" x="241" y="6"/><use href="#mini" x="253" y="6"/>
+    </g>
+  </g>
+
+  <!-- raised secret tray at the front, code hidden behind its wall -->
+  <g transform="translate(0,422)">
+    <rect x="34" y="0" width="186" height="50" rx="7" fill="url(#wellGrad)"/>
+    <g transform="translate(0,22)">
+      <use href="#ball" fill="#b71c1c" x="66"/>
+      <use href="#ball" fill="#1258a8" x="104"/>
+      <use href="#ball" fill="#e3ac16" x="142"/>
+      <use href="#ball" fill="#b71c1c" x="180"/>
+    </g>
+    <rect x="34" y="26" width="186" height="24" rx="6" fill="url(#rimGrad)" stroke="#2e1409" stroke-width="1.2"/>
+    <rect x="36" y="27.5" width="182" height="4" rx="2" fill="#b57a63" opacity="0.7"/>
+  </g>
+
+</svg>
