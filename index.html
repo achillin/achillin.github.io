@@ -3,15 +3,18 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-b5GObebxrNLs2CDD9bj6jXqacD/G8UKoDx4ZcCmkwTs=' 'wasm-unsafe-eval' https://apis.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://firebasestorage.googleapis.com; connect-src 'self' https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://*.europe-west1.firebasedatabase.app wss://*.europe-west1.firebasedatabase.app https://petersplayground.eu; frame-src https://mastermind-test-22a3e.firebaseapp.com; worker-src 'self'; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-b5GObebxrNLs2CDD9bj6jXqacD/G8UKoDx4ZcCmkwTs=' 'wasm-unsafe-eval' https://apis.google.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://firebasestorage.googleapis.com; connect-src 'self' https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://*.europe-west1.firebasedatabase.app wss://*.europe-west1.firebasedatabase.app https://petersplayground.eu; frame-src https://mastermind-test-22a3e.firebaseapp.com; worker-src 'self'; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <!-- Two faces only (2026-08-09 unification): Poppins is THE UI font,
        Bungee Inline is the display face for the logo and landing hero.
-       Roboto is gone - it survived only as the body default nobody chose. -->
-  <link href="https://fonts.googleapis.com/css2?family=Bungee+Inline&family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+       Roboto is gone - it survived only as the body default nobody chose.
+       Both are SELF-HOSTED since 2026-10-10 (src/main.js imports them from
+       @fontsource; Vite bundles the files): the Google Fonts link sent every
+       visitor's address to Google on every page load, without consent. -->
+
 
   <title>Mastermind</title>
   <script>
@@ -22,8 +25,8 @@
       if (p) history.replaceState(null, '', p + window.location.hash);
     })();
   </script>
-  <script type="module" crossorigin src="/assets/index-CWsKQgjt.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-iQv9KUMl.css">
+  <script type="module" crossorigin src="/assets/index-CSBE3a3j.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-CY_woD1c.css">
 </head>
 <body>
   <div id="app"></div>
