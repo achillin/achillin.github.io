@@ -3,7 +3,18 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-b5GObebxrNLs2CDD9bj6jXqacD/G8UKoDx4ZcCmkwTs=' 'wasm-unsafe-eval' https://apis.google.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://firebasestorage.googleapis.com; connect-src 'self' https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://*.europe-west1.firebasedatabase.app wss://*.europe-west1.firebasedatabase.app https://petersplayground.eu; frame-src https://mastermind-test-22a3e.firebaseapp.com; worker-src 'self'; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-4WKtyvs8VaeafvRlIB3R14JcA3IO9xP2ANrbO/NG7Xo=' 'wasm-unsafe-eval' https://apis.google.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://firebasestorage.googleapis.com; connect-src 'self' https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://*.europe-west1.firebasedatabase.app wss://*.europe-west1.firebasedatabase.app https://petersplayground.eu; frame-src https://mastermind-test-22a3e.firebaseapp.com; worker-src 'self'; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <!-- Referrer: the ORIGIN only, never the path or the query (security
+       review 2026-10-09, child-4). The parent's PIN-setup link carries its
+       single-use token in the query, and the browser's default names the
+       WHOLE address to its own origin: every bundle, font and model request
+       made while the page loaded told the host's logs the token. NOT
+       no-referrer: a Firebase API key restricted by HTTP referrer (a later
+       round) refuses every request that carries none. It sits above every
+       link and script on purpose - a request already sent keeps the policy
+       it went out with. The build splices the CSP meta in right after the
+       charset, above this one; the charset stays inside the first 1024 bytes. -->
+  <meta name="referrer" content="strict-origin">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -19,13 +30,35 @@
   <title>Mastermind</title>
   <script>
     // Restore the deep link that public/404.html tucked into ?p= before the
-    // router boots (GitHub Pages SPA fallback — Pages has no rewrite rules)
+    // router boots (GitHub Pages SPA fallback — Pages has no rewrite rules).
+    // THE PARENT'S PIN-SETUP LINK is never restored (security round 7, the
+    // setup finding, 2026-10-11): its single-use token SETS the parent PIN,
+    // and the app renders nothing until sign-in settles — a parent who gave
+    // up during that spinner left the live link in the tab for Back, before
+    // the page could scrub it. So its uid and token go into page memory
+    // (window.__mmSetupLink, never storage) for ParentSetup.vue to take, the
+    // address becomes the bare /parent-setup before the router ever reads
+    // it, and a page the back/forward cache keeps forgets them at once. A
+    // direct /parent-setup?… load (the dev server, no 404 bounce) too.
     (function () {
-      var p = new URLSearchParams(window.location.search).get('p');
-      if (p) history.replaceState(null, '', p + window.location.hash);
+      var here = window.location;
+      var p = new URLSearchParams(here.search).get('p');
+      var target = p || here.pathname + here.search;
+      var setup = /^\/parent-setup\/?\?/i.test(target);
+      if (setup) {
+        var query = new URLSearchParams(target.slice(target.indexOf('?')));
+        var link = window.__mmSetupLink = { uid: query.get('uid') || '', token: query.get('token') || '' };
+        var forget = function (event) {
+          if (event.persisted) link.uid = link.token = '';
+        };
+        window.addEventListener('pagehide', forget);
+        window.addEventListener('pageshow', forget);
+        target = '/parent-setup';
+      }
+      if (p || setup) history.replaceState(null, '', target + here.hash);
     })();
   </script>
-  <script type="module" crossorigin src="/assets/index-BW9Xo74i.js"></script>
+  <script type="module" crossorigin src="/assets/index-cLWdIVp1.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/index-Dp63KoZp.css">
 </head>
 <body>
